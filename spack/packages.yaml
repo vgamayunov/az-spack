@@ -1,0 +1,14 @@
+packages:
+  hpcx-mpi:
+    buildable: false
+    externals:
+    - spec: hpcx-mpi@2.16
+      prefix: /opt/hpcx-v2.16-gcc-mlnx_ofed-ubuntu20.04-cuda12-gdrcopy2-nccl2.18-x86_64/ompi
+  hcoll:
+    externals:
+    - spec: hcoll@4.8.3223
+      prefix: /opt/mellanox/hcoll
+  slurm:
+    externals:
+    - spec: slurm@23.02.7
+      prefix: /usr

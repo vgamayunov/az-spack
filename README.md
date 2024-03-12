@@ -1,2 +1,2 @@
 # az-spack
-Scripts to install SPACK on Azure
+Scripts to install Spack and CVMFS on Azure
