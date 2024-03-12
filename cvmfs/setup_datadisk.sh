@@ -1,4 +1,5 @@
 #!/bin/bash
+set -euo pipefail
 
 DEV=${1:-/dev/sdc}
 PART=${DEV}1
@@ -24,5 +25,3 @@ mkdir -p $MOUNT
 echo "UUID=$UUID       $MOUNT  xfs     defaults,nofail 0 0" >> /etc/fstab
 
 mount -a
-
-ln -s 
