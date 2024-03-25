@@ -1,5 +1,5 @@
 #!/bin/bash
-PKFILE=packages.yaml
+PKFILE=${1:-packages.yaml}
 
 # Detect HPCX in the image and install in spack
 HPCX_DIR=$(ls -d /opt/hpcx*|tail -1)
@@ -13,7 +13,7 @@ packages:
       buildable: false
       externals:
        - spec: hpcx-mpi@$HPCX_VER
-         prefix: $HPCX_DIR
+         prefix: $HPCX_DIR/ompi
   hcoll:
     externals:
     - spec: hcoll@$HCOLL_VER
