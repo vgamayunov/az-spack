@@ -14,9 +14,13 @@ spack config --scope defaults add config:build_stage:/mnt/scratch/\$user/spack-s
 # known deviations: 
 # HB60rs/Standard_HB60rs - cpuinfo missing "clzero" instruction (misidentifies zen as excavator)
 # HBv3/Standard_HB120rs_v3 - cpuinfo missing "pku" instruction (misidentifies zen3 as zen2)
+# HBv4/Standard_HB176_v4 - missing "pku", "flush_l1d"
 MICROARCHFILE=$SPACK_ROOT/lib/spack/external/archspec/json/cpu/microarchitectures.json
 mv $MICROARCHFILE ${MICROARCHFILE}.orig
-cat ${MICROARCHFILE}.orig | jq 'del(.microarchitectures.zen3.features[] | select (. == "pku"))' | jq 'del(.microarchitectures.zen.features[] | select (. == "clzero"))' >$MICROARCHFILE
+cat ${MICROARCHFILE}.orig | \
+	jq 'del(.microarchitectures.zen.features[] | select (. == "clzero"))' | \
+	jq 'del(.microarchitectures.zen3.features[] | select (. == "pku"))' | \
+	jq 'del(.microarchitectures.zen4.features[] | select (. == "pku" or . == "flush_l1d"))' >$MICROARCHFILE
 
 $mydir/gen-external-packages.sh /tmp/packages.yaml
 
