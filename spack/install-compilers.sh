@@ -13,3 +13,4 @@ function install_compiler {
 install_compiler gcc
 install_compiler intel-oneapi-compilers
 install_compiler aocc +license-agreed
+install_compiler nvhpc
