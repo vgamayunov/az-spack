@@ -1,11 +1,10 @@
 #!/bin/bash
-
-. spack/share/spack/setup-env.sh
+. setenv.sh
 
 function install_compiler {
     echo "*** Installing: $* ***"
-    spack install $*
-    spack load $*
+    spack install $* %$SPACK_BASE_COMPILER target=$SPACK_BASE_TARGET
+    spack load $* 
     spack compiler find --scope=site
     spack unload --all
 }

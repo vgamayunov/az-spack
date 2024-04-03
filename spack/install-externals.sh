@@ -1,8 +1,8 @@
 #!/bin/bash
 
-. spack/share/spack/setup-env.sh
+. setenv.sh
 
-spack install hpcx-mpi
-spack install hcoll
-spack install ucx
-spack install ucc
+spack install hpcx-mpi %$SPACK_BASE_COMPILER target=$SPACK_BASE_TARGET
+spack install hcoll %$SPACK_BASE_COMPILER target=$SPACK_BASE_TARGET
+spack install ucx %$SPACK_BASE_COMPILER target=$SPACK_BASE_TARGET
+spack install ucc %$SPACK_BASE_COMPILER target=$SPACK_BASE_TARGET
