@@ -20,15 +20,15 @@ packages:
          prefix: $HPCX_DIR/ompi
   ucx:
     externals:
-    - spec: ucx@1.15.0+cuda+xpmem+gdrcopy %$COMP target=$TARGET
+    - spec: ucx@$UCX_VER+cuda+xpmem+gdrcopy %$COMP target=$TARGET
       prefix: $HPCX_DIR/ucx
       depend_on: libiberty
-    - spec: ucx@1.15.0+cuda+xpmem+gdrcopy+thread_multiple %$COMP target=$TARGET
+    - spec: ucx@$UCX_VER+cuda+xpmem+gdrcopy+thread_multiple %$COMP target=$TARGET
       prefix: $HPCX_DIR/ucx/mt
       depend_on: libiberty
   ucc:
     externals:
-    - spec: ucc@1.3.0+cuda %$COMP target=$TARGET
+    - spec: ucc@$UCC_VER+cuda %$COMP target=$TARGET
       prefix: $HPCX_DIR/ucc
   hcoll:
     externals:
