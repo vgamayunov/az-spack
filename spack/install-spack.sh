@@ -24,7 +24,7 @@ cat ${MICROARCHFILE}.orig | \
 
 $mydir/gen-external-packages.sh /tmp/packages.yaml
 
-cp -fv /tmp/packages.yaml $mydir/modules.yaml $SPACK_ROOT/etc/spack/
+cp -fv /tmp/packages.yaml $mydir/modules.yaml $mydir/config.yaml $SPACK_ROOT/etc/spack/
 spack compiler find --scope=site
 
 cat > setenv.sh <<EOF
