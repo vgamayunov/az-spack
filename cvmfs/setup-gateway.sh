@@ -13,7 +13,8 @@ cat > /etc/cvmfs/gateway/repo.json <<EOF
 {
     "version": 2,
     "repos" : [
-            "azure.pe"
+            "azure.pe",
+            "ape.core"
     ]
 }
 EOF
