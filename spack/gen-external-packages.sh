@@ -9,7 +9,7 @@ HPCX_VER=$(echo $HPCX_DIR |sed 's/^.*hpcx-v\(.*\)-gcc.*$/\1/')
 HCOLL_VER=$(/opt/mellanox/hcoll/bin/hcoll_info -v | sed 's/^Version: v\(.*\) .*$/\1/')
 SLURM_VER=$(sinfo -V|awk '{print $2}')
 UCC_VER=$(LD_LIBRARY_PATH=$HPCX_DIR/ucc/lib $HPCX_DIR/ucc/bin/ucc_info -v |grep version|sed 's/^.*version=\(.*\) revision.*$/\1/')
-UCX_VER=$($HPCX_DIR/ucx/bin/ucx_info|grep "Library version"|sed 's/^.*version: \(.*\)$/\1/')
+UCX_VER=$($HPCX_DIR/ucx/bin/ucx_info -v|grep "Library version"|sed 's/^.*version: \(.*\)$/\1/')
 
 cat << EOF > $PKFILE
 packages:

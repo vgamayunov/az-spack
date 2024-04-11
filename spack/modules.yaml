@@ -3,7 +3,7 @@ modules:
     enable:
       - tcl
     roots:
-      tcl: /cvmfs/azure.spack/1.0.2/modules
+      tcl: /cvmfs/ape.core/modules
     tcl:
       hash_length: 0
 #      hide_implicits: true
