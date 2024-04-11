@@ -7,7 +7,9 @@ rm -f cvmfs-release-latest_all.deb
 sudo apt-get update
 sudo apt-get install -y cvmfs cvmfs-server
 
-mkdir -pv /mnt/resource/cvmfs_srv
+# Publisher may discard cvmfs directories when rebooted
+mkdir -pv /mnt/resource/cvmfs_srv /mnt/resource/cvmfs
+ln -sf /mnt/resource/cvmfs /var/spool/cvmfs
 ln -sf /mnt/resource/cvmfs_srv /srv/cvmfs
 
 systemctl stop autofs

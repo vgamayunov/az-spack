@@ -1,17 +1,17 @@
 #!/bin/bash
 set -euo pipefail
 
-REPONAME=ape.core
+REPONAMES="ape.core"
 SERVER=cvmfsserver
 KEYDIR=${1:-.}
 
-if [ ! -f $KEYDIR/$REPONAME.pub -o ! -f $KEYDIR/$REPONAME.crt -o ! -f $KEYDIR/$REPONAME.gw ] ; then
-  echo Certificates not found in $KEYDIR. Files required: $REPONAME.pub $REPONAME.crt $REPONAME.gw
-  exit 1
-fi
-
 mkdir /tmp/keys
-cp $KEYDIR/$REPONAME.pub $KEYDIR/$REPONAME.crt $KEYDIR/$REPONAME.gw /tmp/keys
-
-cvmfs_server mkfs -w http://$SERVER/cvmfs/$REPONAME -u gw,/srv/cvmfs/$REPONAME/data/txn,http://$SERVER:4929/api/v1 -k /tmp/keys -o root $REPONAME
+for repo in $REPONAMES ; do
+  if [ ! -f $KEYDIR/$repo.pub -o ! -f $KEYDIR/$repo.crt -o ! -f $KEYDIR/$repo.gw ] ; then
+    echo Certificates not found in $KEYDIR. Files required: $repo.pub $repo.crt $repo.gw
+    exit 1
+  fi
+  cp $KEYDIR/$repo.pub $KEYDIR/$repo.crt $KEYDIR/$repo.gw /tmp/keys/
+  cvmfs_server mkfs -w http://$SERVER/cvmfs/$repo -u gw,/srv/cvmfs/$repo/data/txn,http://$SERVER:4929/api/v1 -k /tmp/keys -o root $repo
+done
 rm -rf /tmp/keys
