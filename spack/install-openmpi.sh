@@ -1,5 +1,5 @@
 #!/bin/bash
-. setenv.sh
+. setenv.sh || exit 1
 base_target=${SPACK_BASE_TARGET:-x86_64_v3}
 base_comp=${SPACK_BASE_COMPILER:-gcc@9.4.0}
 

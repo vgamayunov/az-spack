@@ -1,5 +1,5 @@
 #!/bin/bash
-. setenv.sh
+. setenv.sh || exit 1
 
 function install_compiler {
     echo "*** Installing: $* ***"
@@ -9,7 +9,8 @@ function install_compiler {
     spack unload --all
 }
 
-install_compiler gcc
+install_compiler gcc@12.3.0
 install_compiler intel-oneapi-compilers
+install_compiler intel-oneapi-compilers-classic
 install_compiler aocc +license-agreed
 install_compiler nvhpc

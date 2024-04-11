@@ -1,16 +1,22 @@
 #!/bin/bash
 
-. setenv.sh
+. setenv.sh || exit 1
 
 # Do not assign arch or compiler to the externals
-spack install hpcx-mpi
-spack install hcoll
-spack install ucx
-spack install ucc
+# spack install -v hpcx-mpi
+# spack install -v hcoll
+# spack install -v ucx
+# spack install -v ucc
+# 
+# exit 0
 
-exit 0
+function install_package {
+    echo "*** Installing: $* ***"
+    spack install $* %$SPACK_BASE_COMPILER target=$SPACK_BASE_TARGET
+}
 
-spack install hpcx-mpi %$SPACK_BASE_COMPILER target=$SPACK_BASE_TARGET
-spack install hcoll %$SPACK_BASE_COMPILER target=$SPACK_BASE_TARGET
-spack install ucx %$SPACK_BASE_COMPILER target=$SPACK_BASE_TARGET
-spack install ucc %$SPACK_BASE_COMPILER target=$SPACK_BASE_TARGET
+install_package hpcx-mpi
+install_package hcoll
+install_package ucx
+install_package ucc
+install_package slurm
