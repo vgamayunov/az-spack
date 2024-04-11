@@ -32,3 +32,8 @@ source $(readlink -f spack/share/spack/setup-env.sh)
 export SPACK_BASE_COMPILER=gcc@9.4.0
 export SPACK_BASE_TARGET=x86_64_v3
 EOF
+
+mkdir apps modules
+touch spack/.cvmfscatalog
+touch apps/.cvmfscatalog
+touch modules/.cvmfscatalog
