@@ -1,4 +1,4 @@
 config:
   install_tree:
-    root: /cvmfs/azure.pe/apps
+    root: /cvmfs/ape.core/apps
   install_path_scheme: '{name}/{version}/{hash:6}'

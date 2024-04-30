@@ -1,3 +1,4 @@
+# Automatically generated
 packages:
   hpcx-mpi:
       buildable: false
@@ -12,6 +13,8 @@ packages:
     externals:
     - spec: ucx@1.15.0+cuda+xpmem+gdrcopy
       prefix: /opt/hpcx-v2.16-gcc-mlnx_ofed-ubuntu20.04-cuda12-gdrcopy2-nccl2.18-x86_64/ucx
+    - spec: ucx@1.15.0+cuda+xpmem+gdrcopy+thread_multiple
+      prefix: /opt/hpcx-v2.16-gcc-mlnx_ofed-ubuntu20.04-cuda12-gdrcopy2-nccl2.18-x86_64/ucx/mt
   ucc:
     externals:
     - spec: ucc@1.3.0+cuda

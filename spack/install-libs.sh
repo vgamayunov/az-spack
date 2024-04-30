@@ -1,11 +1,6 @@
 #!/bin/bash
 . setenv.sh || exit 1
 
-# Intel libraries
-spack install intel-oneapi-mpi %$SPACK_BASE_COMPILER target=$SPACK_BASE_TARGET
-spack install intel-oneapi-mkl %$SPACK_BASE_COMPILER target=$SPACK_BASE_TARGET
-spack install intel-tbb %$SPACK_BASE_COMPILER target=$SPACK_BASE_TARGET
-
 # GCC+HPCX
 spack install --reuse netcdf-fortran %$SPACK_BASE_COMPILER target=$SPACK_BASE_TARGET ^hpcx-mpi
 
