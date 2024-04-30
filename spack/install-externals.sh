@@ -18,5 +18,6 @@ function install_package {
 install_package hpcx-mpi
 install_package hcoll
 install_package ucx
+install_package ucx+thread_multiple
 install_package ucc
 install_package slurm
