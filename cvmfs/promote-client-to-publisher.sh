@@ -1,11 +1,8 @@
 #!/bin/bash
 set -euo pipefail
 
-wget https://ecsft.cern.ch/dist/cvmfs/cvmfs-release/cvmfs-release-latest_all.deb
-dpkg -i cvmfs-release-latest_all.deb
-rm -f cvmfs-release-latest_all.deb
 apt-get update
-apt-get install -y cvmfs cvmfs-server
+apt-get install -y cvmfs-server
 
 # Publisher may discard cvmfs directories when rebooted
 mkdir -pv /mnt/resource/cvmfs_srv /mnt/resource/cvmfs

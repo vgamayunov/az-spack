@@ -7,17 +7,7 @@ if ! dpkg -l cvmfs-server ; then
 fi
 
 apt-get update
-apt-get install cvmfs-gateway
-
-cat > /etc/cvmfs/gateway/repo.json <<EOF
-{
-    "version": 2,
-    "repos" : [
-            "azure.pe",
-            "ape.core"
-    ]
-}
-EOF
+apt-get install -y cvmfs-gateway
 
 cat > /etc/cvmfs/gateway/user.json <<EOF
 {
@@ -30,10 +20,5 @@ cat > /etc/cvmfs/gateway/user.json <<EOF
     "work_dir": "/var/lib/cvmfs-gateway"
 }
 EOF
-
-# Generate gateway password
-password=$(openssl rand -hex 12)
-
-echo "plain_text ape_key $password" > /etc/cvmfs/keys/azure.pe.gw
 
 systemctl restart cvmfs-gateway.service
