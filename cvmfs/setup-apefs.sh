@@ -1,6 +1,6 @@
 #!/bin/bash
 set -euo pipefail
-REPOS="ape.core ape.libs"
+REPOS="ape.core"
 
 for REPONAME in $REPOS ; do
 
