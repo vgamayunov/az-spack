@@ -1,7 +1,7 @@
 #!/bin/bash
 set -euo pipefail
 
-REPONAMES="ape.core ape.libs"
+REPONAMES="ape.core"
 SERVER=cvmfsserver
 KEYDIR=${1:-/tmp/tmpkeys}
 
