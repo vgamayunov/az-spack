@@ -1,9 +1,9 @@
 #!/bin/bash
 set -euo pipefail
 
+SERVER=${1:-cvmfsserver}
+KEYDIR=${2:-/tmp/tmpkeys}
 REPONAMES="ape.core"
-SERVER=cvmfsserver
-KEYDIR=${1:-/tmp/tmpkeys}
 
 for repo in $REPONAMES ; do
   if [ ! -f $KEYDIR/$repo.pub -o ! -f $KEYDIR/$repo.crt -o ! -f $KEYDIR/$repo.gw ] ; then

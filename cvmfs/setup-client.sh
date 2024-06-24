@@ -1,5 +1,5 @@
 #!/bin/bash
-SERVER=cvmfsserver
+SERVER=${1:-cvmfsserver}
 REPO=ape.core
 
 wget https://ecsft.cern.ch/dist/cvmfs/cvmfs-release/cvmfs-release-latest_all.deb
