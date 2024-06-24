@@ -30,10 +30,11 @@ touch spack/.cvmfscatalog
 touch apps/.cvmfscatalog
 touch modules/.cvmfscatalog
 
-$mydir/find-external-versions.sh $SPACK_ROOT/versions.yaml $BASE_COMPILER $BASE_TARGET
-$mydir/gen-external-packages.sh $SPACK_ROOT/versions.yaml $SPACK_ROOT/etc/spack/packages.yaml
 appsdir=$(readlink -f apps)
 modulesdir=$(readlink -f modules)
+versionsfile=$(readlink -f versions.yaml)
+$mydir/find-external-versions.sh $versionsfile $BASE_COMPILER $BASE_TARGET
+$mydir/gen-external-packages.sh $versionsfile $SPACK_ROOT/etc/spack/packages.yaml
 sed "s/__APPSDIR__/$appsdir/g" $mydir/config.yaml > $SPACK_ROOT/etc/spack/config.yaml
 sed "s/__MODULESDIR__/$modulesdir/g" $mydir/modules.yaml > $SPACK_ROOT/etc/spack/modules.yaml
 
@@ -41,7 +42,7 @@ spack compiler find --scope=site
 
 cat > setenv.sh <<EOF
 $mydir/find-external-versions.sh /tmp/versions.yaml
-diff /tmp/versions.yaml $SPACK_ROOT/versions.yaml || echo "WARNING: versions in the OS image are different from this SPACK root"
+diff /tmp/versions.yaml $versionsfile || echo "WARNING: OS image version does not match this Spack environment"
 source $(readlink -f spack/share/spack/setup-env.sh)
 export SPACK_BASE_COMPILER=$BASE_COMPILER
 export SPACK_BASE_TARGET=$BASE_TARGET

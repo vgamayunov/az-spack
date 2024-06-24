@@ -8,14 +8,15 @@ if [ ! -e $VERSIONS_FILE ] ; then
   exit 1
 fi
 
-COMP=$(grep "^base_compiler:" $VERSIONS_FILE | awk '{print $1}')
-TARGET=$(grep "^base_target:" $VERSIONS_FILE | awk '{print $1}')
-HPCX_VER=$(grep "^hpcx:" $VERSIONS_FILE | awk '{print $1}')
-UCX_VER=$(grep "^ucx:" $VERSIONS_FILE | awk '{print $1}')
-UCC_VER=$(grep "^ucc:" $VERSIONS_FILE | awk '{print $1}')
-HCOLL_VER=$(grep "^hcoll:" $VERSIONS_FILE | awk '{print $1}')
-SLURM_VER=$(grep "^slurm:" $VERSIONS_FILE | awk '{print $1}')
-CUDA_VER=$(grep "^cuda:" $VERSIONS_FILE | awk '{print $1}')
+COMP=$(grep "^base_compiler:" $VERSIONS_FILE | awk '{print $2}')
+TARGET=$(grep "^base_target:" $VERSIONS_FILE | awk '{print $2}')
+HPCX_VER=$(grep "^hpcx:" $VERSIONS_FILE | awk '{print $2}')
+HPCX_DIR=$(grep "^hpcx_dir:" $VERSIONS_FILE | awk '{print $2}')
+UCX_VER=$(grep "^ucx:" $VERSIONS_FILE | awk '{print $2}')
+UCC_VER=$(grep "^ucc:" $VERSIONS_FILE | awk '{print $2}')
+HCOLL_VER=$(grep "^hcoll:" $VERSIONS_FILE | awk '{print $2}')
+SLURM_VER=$(grep "^slurm:" $VERSIONS_FILE | awk '{print $2}')
+CUDA_VER=$(grep "^cuda:" $VERSIONS_FILE | awk '{print $2}')
 
 cat << EOF > $PKFILE
 packages:
