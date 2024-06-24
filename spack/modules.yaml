@@ -3,7 +3,7 @@ modules:
     enable:
       - tcl
     roots:
-      tcl: /cvmfs/ape.core/modules
+      tcl: __MODULESDIR__
     tcl:
       hash_length: 0
 #      hide_implicits: true

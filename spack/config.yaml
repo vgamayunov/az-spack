@@ -1,4 +1,4 @@
 config:
   install_tree:
-    root: /cvmfs/ape.core/apps
+    root: __APPSDIR__
   install_path_scheme: '{name}/{version}/{hash:6}'

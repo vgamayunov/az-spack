@@ -1,15 +1,21 @@
 #!/bin/bash
-PKFILE=${1:-packages.yaml}
-COMP=${2:-"gcc@9.4.0"}
-TARGET=${3:-x86_64_v3}
+set -euo pipefail
+VERSIONS_FILE=${1:-versions.yaml}
+PKFILE=${2:-packages.yaml}
 
-# Detect HPCX in the image and install in spack
-HPCX_DIR=$(ls -d /opt/hpcx*|tail -1)
-HPCX_VER=$(echo $HPCX_DIR |sed 's/^.*hpcx-v\(.*\)-gcc.*$/\1/')
-HCOLL_VER=$(/opt/mellanox/hcoll/bin/hcoll_info -v | sed 's/^Version: v\(.*\) .*$/\1/')
-SLURM_VER=$(sinfo -V|awk '{print $2}')
-UCC_VER=$(LD_LIBRARY_PATH=$HPCX_DIR/ucc/lib $HPCX_DIR/ucc/bin/ucc_info -v |grep version|sed 's/^.*version=\(.*\) revision.*$/\1/')
-UCX_VER=$($HPCX_DIR/ucx/bin/ucx_info -v|grep "Library version"|sed 's/^.*version: \(.*\)$/\1/')
+if [ ! -e $VERSIONS_FILE ] ; then
+  echo ERROR: Unable to open version file "$VERSIONS_FILE"
+  exit 1
+fi
+
+COMP=$(grep "^base_compiler:" $VERSIONS_FILE | awk '{print $1}')
+TARGET=$(grep "^base_target:" $VERSIONS_FILE | awk '{print $1}')
+HPCX_VER=$(grep "^hpcx:" $VERSIONS_FILE | awk '{print $1}')
+UCX_VER=$(grep "^ucx:" $VERSIONS_FILE | awk '{print $1}')
+UCC_VER=$(grep "^ucc:" $VERSIONS_FILE | awk '{print $1}')
+HCOLL_VER=$(grep "^hcoll:" $VERSIONS_FILE | awk '{print $1}')
+SLURM_VER=$(grep "^slurm:" $VERSIONS_FILE | awk '{print $1}')
+CUDA_VER=$(grep "^cuda:" $VERSIONS_FILE | awk '{print $1}')
 
 cat << EOF > $PKFILE
 packages:
@@ -38,4 +44,8 @@ packages:
     externals:
     - spec: slurm@$SLURM_VER %$COMP target=$TARGET
       prefix: /usr
+  cuda:
+    externals:
+    - spec: cuda@$CUDA_VER %$COMP target=$TARGET
+      prefix: /usr/local/cuda-$CUDA_VER
 EOF

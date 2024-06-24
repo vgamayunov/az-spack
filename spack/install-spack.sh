@@ -1,6 +1,9 @@
 #!/bin/bash
 set -euo pipefail
 
+BASE_COMPILER=gcc@9.4.0
+BASE_TARGET=x86_64_v3
+
 mydir=$(readlink -f $(dirname $0))
 
 git clone -c feature.manyFiles=true --branch=releases/v0.22 https://github.com/spack/spack.git
@@ -22,18 +25,25 @@ cat ${MICROARCHFILE}.orig | \
 	jq 'del(.microarchitectures.zen3.features[] | select (. == "pku"))' | \
 	jq 'del(.microarchitectures.zen4.features[] | select (. == "pku" or . == "flush_l1d"))' >$MICROARCHFILE
 
-$mydir/gen-external-packages.sh /tmp/packages.yaml
-
-cp -fv /tmp/packages.yaml $mydir/modules.yaml $mydir/config.yaml $SPACK_ROOT/etc/spack/
-spack compiler find --scope=site
-
-cat > setenv.sh <<EOF
-source $(readlink -f spack/share/spack/setup-env.sh)
-export SPACK_BASE_COMPILER=gcc@9.4.0
-export SPACK_BASE_TARGET=x86_64_v3
-EOF
-
 mkdir apps modules
 touch spack/.cvmfscatalog
 touch apps/.cvmfscatalog
 touch modules/.cvmfscatalog
+
+$mydir/find-external-versions.sh $SPACK_ROOT/versions.yaml $BASE_COMPILER $BASE_TARGET
+$mydir/gen-external-packages.sh $SPACK_ROOT/versions.yaml $SPACK_ROOT/etc/spack/packages.yaml
+appsdir=$(readlink -f apps)
+modulesdir=$(readlink -f modules)
+sed "s/__APPSDIR__/$appsdir/g" $mydir/config.yaml > $SPACK_ROOT/etc/spack/config.yaml
+sed "s/__MODULESDIR__/$modulesdir/g" $mydir/modules.yaml > $SPACK_ROOT/etc/spack/modules.yaml
+
+spack compiler find --scope=site
+
+cat > setenv.sh <<EOF
+$mydir/find-external-versions.sh /tmp/versions.yaml
+diff /tmp/versions.yaml $SPACK_ROOT/versions.yaml || echo "WARNING: versions in the OS image are different from this SPACK root"
+source $(readlink -f spack/share/spack/setup-env.sh)
+export SPACK_BASE_COMPILER=$BASE_COMPILER
+export SPACK_BASE_TARGET=$BASE_TARGET
+EOF
+
