@@ -3,7 +3,7 @@
 SERVER=cvmfsserver
 SSHUSER=hpcadmin
 SSHKEY=~/cvmfs/hpcadmin_id_rsa
-REPOLIST="ape.core azure.pe"
+REPOLIST="ape.core"
 
 KEYDIR=${1:-/tmp/tmpkeys}
 mkdir -p $KEYDIR
