@@ -3,6 +3,12 @@ set -euo pipefail
 REPO=ape.core
 VERSION=1.0.1
 
+if [ -d /cvmfs/$REPO/$VERSION/spack ]; then
+    echo ERROR: Found existing Spack install at /cvmfs/$REPO/$VERSION/spack
+    echo Did you mean to change the version number?
+    exit 1
+fi
+
 mydir=$(dirname $(reaflink -f $0))
 
 function run_and_publish {
