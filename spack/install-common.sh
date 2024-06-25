@@ -7,8 +7,8 @@ function install_package {
     spack install $* %$SPACK_BASE_COMPILER target=$SPACK_BASE_TARGET
 }
 
-install_package python
-install_package cmake
+install_package python@3.11.7
+install_package cmake@3.27.9
 
 # Intel libraries
 install_package intel-oneapi-mpi

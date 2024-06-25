@@ -10,7 +10,7 @@ function install_compiler {
 }
 
 install_compiler gcc@12.3.0
-install_compiler intel-oneapi-compilers
-install_compiler intel-oneapi-compilers-classic
-install_compiler aocc +license-agreed
-install_compiler nvhpc
+install_compiler intel-oneapi-compilers@2024.1.0
+install_compiler intel-oneapi-compilers-classic@2021.10.0
+install_compiler aocc@4.2.0 +license-agreed
+install_compiler nvhpc@24.3
