@@ -36,8 +36,8 @@ modulesdir=$(readlink -f modules)
 versionsfile=$(readlink -f versions.yaml)
 $mydir/find-external-versions.sh $versionsfile $BASE_COMPILER $BASE_TARGET
 $mydir/gen-external-packages.sh $versionsfile $SPACK_ROOT/etc/spack/packages.yaml
-sed "s/__APPSDIR__/$appsdir/g" $mydir/config.yaml > $SPACK_ROOT/etc/spack/config.yaml
-sed "s/__MODULESDIR__/$modulesdir/g" $mydir/modules.yaml > $SPACK_ROOT/etc/spack/modules.yaml
+sed "s!__APPSDIR__!$appsdir!g" $mydir/config.yaml > $SPACK_ROOT/etc/spack/config.yaml
+sed "s!__MODULESDIR__!$modulesdir!g" $mydir/modules.yaml > $SPACK_ROOT/etc/spack/modules.yaml
 
 spack compiler find --scope=site
 
