@@ -6,7 +6,8 @@ BASE_TARGET=x86_64_v3
 
 mydir=$(readlink -f $(dirname $0))
 
-git clone -c feature.manyFiles=true --branch=releases/v0.22 https://github.com/spack/spack.git
+git clone -c feature.manyFiles=true https://github.com/spack/spack.git
+# git clone -c feature.manyFiles=true --branch=releases/v0.22 https://github.com/spack/spack.git
 source spack/share/spack/setup-env.sh
 spack config --scope defaults add config:build_jobs:32
 spack config --scope defaults add config:build_stage:/mnt/scratch/\$user/spack-stage
