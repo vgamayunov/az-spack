@@ -42,8 +42,8 @@ sed "s!__MODULESDIR__!$modulesdir!g" $mydir/modules.yaml > $SPACK_ROOT/etc/spack
 spack compiler find --scope=site
 
 cat > setenv.sh <<EOF
-$mydir/find-external-versions.sh /tmp/versions.yaml
-diff /tmp/versions.yaml $versionsfile || echo "WARNING: OS image version does not match this Spack environment"
+# $mydir/find-external-versions.sh /tmp/versions.yaml
+# diff /tmp/versions.yaml $versionsfile || echo "WARNING: OS image version does not match this Spack environment"
 source $(readlink -f spack/share/spack/setup-env.sh)
 export SPACK_BASE_COMPILER=$BASE_COMPILER
 export SPACK_BASE_TARGET=$BASE_TARGET
