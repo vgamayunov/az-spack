@@ -1,25 +1,28 @@
 # Automatically generated
 packages:
-  hpcx-mpi:
-      buildable: false
-      externals:
-       - spec: hpcx-mpi@2.16
-         prefix: /opt/hpcx-v2.16-gcc-mlnx_ofed-ubuntu20.04-cuda12-gdrcopy2-nccl2.18-x86_64/ompi
+  # hpcx-mpi:
+  #     buildable: false
+  #     externals:
+  #      - spec: hpcx-mpi@2.16
+  #        prefix: /opt/hpcx-v2.16-gcc-mlnx_ofed-ubuntu20.04-cuda12-gdrcopy2-nccl2.18-x86_64/ompi
   hcoll:
     externals:
     - spec: hcoll@4.8.3223
       prefix: /opt/mellanox/hcoll
-  ucx:
-    externals:
-    - spec: ucx@1.15.0+cuda+xpmem+gdrcopy
-      prefix: /opt/hpcx-v2.16-gcc-mlnx_ofed-ubuntu20.04-cuda12-gdrcopy2-nccl2.18-x86_64/ucx
-    - spec: ucx@1.15.0+cuda+xpmem+gdrcopy+thread_multiple
-      prefix: /opt/hpcx-v2.16-gcc-mlnx_ofed-ubuntu20.04-cuda12-gdrcopy2-nccl2.18-x86_64/ucx/mt
-  ucc:
-    externals:
-    - spec: ucc@1.3.0+cuda
-      prefix: /opt/hpcx-v2.16-gcc-mlnx_ofed-ubuntu20.04-cuda12-gdrcopy2-nccl2.18-x86_64/ucc
+  # ucx:
+  #   externals:
+  #   - spec: ucx@1.15.0+cuda+xpmem+gdrcopy
+  #     prefix: /opt/hpcx-v2.16-gcc-mlnx_ofed-ubuntu20.04-cuda12-gdrcopy2-nccl2.18-x86_64/ucx
+  #   - spec: ucx@1.15.0+cuda+xpmem+gdrcopy+thread_multiple
+  #     prefix: /opt/hpcx-v2.16-gcc-mlnx_ofed-ubuntu20.04-cuda12-gdrcopy2-nccl2.18-x86_64/ucx/mt
+  # ucc:
+  #   externals:
+  #   - spec: ucc@1.3.0+cuda
+  #     prefix: /opt/hpcx-v2.16-gcc-mlnx_ofed-ubuntu20.04-cuda12-gdrcopy2-nccl2.18-x86_64/ucc
   slurm:
     externals:
     - spec: slurm@23.02.7
       prefix: /usr
+  ucx:
+    version: [1.16.0]
+    variants: +cuda+xpmem+thread_multiple+gdrcopy+dc+rc+ud
