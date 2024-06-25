@@ -15,9 +15,9 @@ function install_package {
     spack install $* %$SPACK_BASE_COMPILER target=$SPACK_BASE_TARGET
 }
 
-install_package hpcx-mpi
+# install_package hpcx-mpi
 install_package hcoll
-install_package ucx
-install_package ucx+thread_multiple
-install_package ucc
+# install_package ucx
+# install_package ucx+thread_multiple
+# install_package ucc
 install_package slurm
