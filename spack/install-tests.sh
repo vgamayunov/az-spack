@@ -3,13 +3,7 @@
 
 set -euo pipefail
 
-function install_package {
-  pkg=$1
-  comp=$2
-  mpi=$3
-  echo "*** Installing: $pkg using compiler $comp and MPI $mpi ***"
-  spack install --reuse $pkg%$comp ^$mpi%$comp
-}
-
-install_package intel-mpi-benchmarks intel@2021.10.0 openmpi
-install_package intel-mpi-benchmarks nvhpc openmpi
+spack install intel-mpi-benchmarks %$SPACK_BASE_COMPILER ^openmpi%$SPACK_BASE_COMPILER
+spack install intel-mpi-benchmarks %nvhpc@24.3 ^openmpi%nvhpc
+spack install intel-mpi-benchmarks %intel@2021.10.0 ^openmpi%intel@2021.10.0
+spack install intel-mpi-benchmarks %intel@2021.10.0 ^intel-oneapi-mpi

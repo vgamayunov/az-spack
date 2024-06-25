@@ -1,7 +1,7 @@
 #!/bin/bash
 set -euo pipefail
-REPO=ape.core
-VERSION=1.0.1
+REPO=${1:-ape.core}
+VERSION=${2:-1.0.1}
 
 if [ -d /cvmfs/$REPO/$VERSION/spack ]; then
     echo ERROR: Found existing Spack install at /cvmfs/$REPO/$VERSION/spack

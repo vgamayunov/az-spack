@@ -16,7 +16,7 @@ function install_openmpi {
       ^autoconf%$base_comp ^automake%$base_comp ^binutils+libiberty%$base_comp \
       ^gmake%$base_comp ^hwloc%$base_comp ^libevent%$base_comp ^libtool%$base_comp \
       ^numactl%$base_comp ^pkgconf%$base_comp ^pmix%$base_comp \
-      ^ucc@$UCC_VER%$base_comp ^ucx@$UCX_VER+cuda+xpmem+thread_multiple+gdrcopy+dc+rc+ud%$base_comp \
+      ^ucc@$UCC_VER%$base_comp ^ucx@$UCX_VER+cuda+xpmem+thread_multiple+gdrcopy+dc+rc+ud+mlx5_dv+cma%$base_comp \
       ^hcoll%$base_comp ^slurm%$base_comp
 }
 
