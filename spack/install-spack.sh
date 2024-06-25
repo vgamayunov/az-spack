@@ -26,7 +26,7 @@ cat ${MICROARCHFILE}.orig | \
 	jq 'del(.microarchitectures.zen3.features[] | select (. == "pku"))' | \
 	jq 'del(.microarchitectures.zen4.features[] | select (. == "pku" or . == "flush_l1d"))' >$MICROARCHFILE
 
-mkdir apps modules
+mkdir -pv apps modules
 touch spack/.cvmfscatalog
 touch apps/.cvmfscatalog
 touch modules/.cvmfscatalog

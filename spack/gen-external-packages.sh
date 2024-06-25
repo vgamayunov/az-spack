@@ -1,5 +1,5 @@
 #!/bin/bash
-set -euo pipefail
+set -euox pipefail
 VERSIONS_FILE=${1:-versions.yaml}
 PKFILE=${2:-packages.yaml}
 
@@ -20,23 +20,23 @@ CUDA_VER=$(grep "^cuda:" $VERSIONS_FILE | awk '{print $2}')
 
 cat << EOF > $PKFILE
 packages:
-  hpcx-mpi:
-      buildable: false
-      externals:
-       - spec: hpcx-mpi@$HPCX_VER %$COMP target=$TARGET
-         prefix: $HPCX_DIR/ompi
-  ucx:
-    externals:
-    - spec: ucx@$UCX_VER+cuda+xpmem+gdrcopy %$COMP target=$TARGET
-      prefix: $HPCX_DIR/ucx
-      depend_on: libiberty
-    - spec: ucx@$UCX_VER+cuda+xpmem+gdrcopy+thread_multiple %$COMP target=$TARGET
-      prefix: $HPCX_DIR/ucx/mt
-      depend_on: libiberty
-  ucc:
-    externals:
-    - spec: ucc@$UCC_VER+cuda %$COMP target=$TARGET
-      prefix: $HPCX_DIR/ucc
+  # hpcx-mpi:
+  #     buildable: false
+  #     externals:
+  #      - spec: hpcx-mpi@$HPCX_VER %$COMP target=$TARGET
+  #        prefix: $HPCX_DIR/ompi
+  # ucx:
+  #   externals:
+  #   - spec: ucx@$UCX_VER+cuda+xpmem+gdrcopy %$COMP target=$TARGET
+  #     prefix: $HPCX_DIR/ucx
+  #     depend_on: libiberty
+  #   - spec: ucx@$UCX_VER+cuda+xpmem+gdrcopy+thread_multiple %$COMP target=$TARGET
+  #     prefix: $HPCX_DIR/ucx/mt
+  #     depend_on: libiberty
+  # ucc:
+  #   externals:
+  #   - spec: ucc@$UCC_VER+cuda %$COMP target=$TARGET
+  #     prefix: $HPCX_DIR/ucc
   hcoll:
     externals:
     - spec: hcoll@$HCOLL_VER %$COMP target=$TARGET
@@ -45,8 +45,11 @@ packages:
     externals:
     - spec: slurm@$SLURM_VER %$COMP target=$TARGET
       prefix: /usr
-  cuda:
-    externals:
-    - spec: cuda@$CUDA_VER %$COMP target=$TARGET
-      prefix: /usr/local/cuda-$CUDA_VER
+  # cuda:
+  #   externals:
+  #   - spec: cuda@$CUDA_VER %$COMP target=$TARGET
+  #     prefix: /usr/local/cuda-$CUDA_VER
+  ucx:
+    version: [1.16.0]
+    variants: +cuda+xpmem+thread_multiple+gdrcopy+dc+rc+ud
 EOF
